@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "testchart.fullname" . }}
+  name: nginx
   labels:
     app.kubernetes.io/name: {{ include "testchart.name" . }}
     helm.sh/chart: {{ include "testchart.chart" . }}
@@ -49,3 +49,6 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
     {{- end }}
+
+imagePullSecrets:
+  - name: {{ .Values.imageCredentials.name }}
